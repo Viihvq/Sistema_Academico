@@ -78,7 +78,7 @@ public class AtividadeGUI {
     public JButton getBotaoCriarAtividade(){
         criarAtividade.addActionListener((al) -> {
 
-            try { //transformar em data
+            try {
             System.out.println(nomeAtividade.getText()+" "+ Double.parseDouble(notaMaxima.getText()));
 
             if (nomeAtividade.getText().isBlank() || notaMaxima.getText().isBlank() || prazoLimiteDia.getText().isBlank() ||
@@ -87,30 +87,31 @@ public class AtividadeGUI {
                 JOptionPane.showMessageDialog(null,
                 "ERRO \nINFORMAÇÕES FALTANDO.",
                 "ERROR",JOptionPane.ERROR_MESSAGE);
+
             }else {
+                //transforma em data e adiciona no banco
                 LocalDate data = LocalDate.of(Integer.valueOf(prazoLimiteAno.getText()),
                         Integer.valueOf(prazoLimiteMes.getText()),
                         Integer.valueOf(prazoLimiteDia.getText()));
+
                 java.sql.Date dataSql = java.sql.Date.valueOf(data);
                 Queries queriesAtividade = new Queries(conexao);
                 queriesAtividade.cadastroAtividade(nomeAtividade.getText(), dataSql, Double.parseDouble(notaMaxima.getText()));
 
                 JOptionPane.showMessageDialog(null,
-                                              "     ATIVIDADE CRIADA.",
-                                              "SUCESSO",JOptionPane.INFORMATION_MESSAGE);
+                        "     ATIVIDADE CRIADA.",
+                        "SUCESSO",
+                        JOptionPane.INFORMATION_MESSAGE);
             }
 
             } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null,"ERRO \nFAVOR TENTAR NOVAMENTE!",
+                JOptionPane.showMessageDialog(null,
+                        "ERRO \nFAVOR TENTAR NOVAMENTE!",
                         "ERROR",JOptionPane.ERROR_MESSAGE);
+
                 e.printStackTrace();
-
             }
-
-
         });
         return criarAtividade;
     }
-
-
 }

@@ -2,11 +2,8 @@ package dados;
 
 import entidades.Aluno;
 import entidades.Atividade;
-import entidades.Nota;
 import entidades.Professor;
-
 import javax.swing.*;
-import java.math.BigInteger;
 import java.sql.*;
 
 public class Queries {
@@ -25,9 +22,8 @@ public class Queries {
         conexaoBD = conexao;
     }
 
-    //aqui vou ter que colocar de padrão id_professor 1, já que não tem como saber qual professor ta lançando a atividade
     public static void cadastroAtividade(String nome, Date data_entrega, Double valor_max) throws SQLException {
-        System.out.println("chegou");//NOTA TA COMO DOUBLE
+        System.out.println("chegou");//DEBBUG
         PreparedStatement preparedStatement = conexaoBD.prepareStatement("INSERT INTO atividade (nome, data_de_entrega, valor_maximo) VALUES(?, ?, ?);");
         preparedStatement.setString(1, nome);
         preparedStatement.setDate(2,data_entrega);
@@ -80,7 +76,6 @@ public class Queries {
 
             System.out.println(atividade.getId()+" "+atividade.getValor_maximo());
         }
-//            return atividade.getId();
     }
 
     public void getMatriculaAluno(String nomeAluno) throws SQLException {
@@ -94,7 +89,6 @@ public class Queries {
             aluno.setMatricula(rs.getInt(1));
             System.out.println("MATRICULA: "+aluno.getMatricula());
         }
-//        return aluno.getMatricula();
     }
 
     public Integer setNotas(String nomeAluno, Double notaAluno, String nomeAtividade){

@@ -3,7 +3,6 @@ package desktop;
 import entidades.Aluno;
 import entidades.Atividade;
 import entidades.Professor;
-
 import javax.swing.*;
 import java.awt.*;
 import java.sql.Connection;
@@ -12,7 +11,7 @@ public class InterfacePrincipal extends JFrame {
     private Connection conexaoBanco;
     private CardLayout cardLayout = new CardLayout();
     private JPanel cardPanel = new JPanel();
-    private TelaInicial telaInicial;// = new TelaInicial();
+    private TelaInicial telaInicial;
     private AtividadeGUI atividadeGUI;
     private Notas notas;
     private Aluno aluno;
@@ -34,8 +33,6 @@ public class InterfacePrincipal extends JFrame {
 
         notas = new Notas();
         add(getTelaNota(), "notas");
-        //cria a instancia
-        //adiciona no jframe
 
         botoesIniciais();
 
