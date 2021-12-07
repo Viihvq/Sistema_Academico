@@ -37,8 +37,9 @@ public class InterfacePrincipal extends JFrame {
         botoesIniciais();
 
         exibe("inicial");
+        setTitle("Sistema Acadêmico");
 
-        setSize(400,400);
+        setSize(400,350); //---------
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //para de rodar ao clicar no x
         setLocationRelativeTo(null); //centraliza

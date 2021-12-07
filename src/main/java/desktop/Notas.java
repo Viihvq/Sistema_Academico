@@ -5,6 +5,7 @@ import dados.Queries;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
+import java.awt.*;
 import java.io.*;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -26,22 +27,22 @@ public class Notas {
         notaPanel = new JPanel();
 
         JPanel panelEdicao1 = new JPanel();
-        panelEdicao1.setBorder(BorderFactory.createEmptyBorder(50,50,0,45));
+        panelEdicao1.setBorder(BorderFactory.createEmptyBorder(40,40,0,50));
         BoxLayout l = new BoxLayout(panelEdicao1, BoxLayout.X_AXIS);
         panelEdicao1.setLayout(l);
 
-        JLabel txtModelo = new JLabel("Planilha de notas pronta   ");
+        JLabel txtModelo = new JLabel("Planilha de notas pronta:   ");
         panelEdicao1.add(txtModelo);
+
         baixarModelo = new JButton("Baixar modelo .csv");
+        baixarModelo.setBorder(BorderFactory.createEmptyBorder(4,20,4,20));
+        baixarModelo.setBackground(new Color(239, 246, 255));
         panelEdicao1.add(baixarModelo);
 
         JPanel panelEdicao2 = new JPanel();
-        panelEdicao2.setBorder(BorderFactory.createEmptyBorder(50,30,30,45));
+        panelEdicao2.setBorder(BorderFactory.createEmptyBorder(50,65,30,40));
         BoxLayout l2 = new BoxLayout(panelEdicao2, BoxLayout.X_AXIS);
         panelEdicao2.setLayout(l2);
-
-        nomeAtividade = new JLabel("Dir: ");
-        nomeAtividade.setBorder(BorderFactory.createEmptyBorder(10,130,30,120));
 
         try {
             Queries queriesAtividade = new Queries(conexao);
@@ -51,12 +52,22 @@ public class Notas {
         }
 
         atividadesExistentes = new JComboBox<>(atividades);
+        atividadesExistentes.setBackground(new Color(239, 246, 255));
         panelEdicao2.add(atividadesExistentes);
 
+        panelEdicao2.add(Box.createRigidArea(new Dimension(35,0)));
+
         uploadArquivo = new JButton("Upload arquivo");
+        uploadArquivo.setBorder(BorderFactory.createEmptyBorder(4,31,4,29));
+        uploadArquivo.setBackground(new Color(239, 246, 255));
         panelEdicao2.add(uploadArquivo);
 
+        nomeAtividade = new JLabel("Dir: ");
+        nomeAtividade.setBorder(BorderFactory.createEmptyBorder(0,130,25,120));
+
         enviarNota = new JButton("Lançar notas");
+        enviarNota.setBorder(BorderFactory.createEmptyBorder(15,35,15,35));
+        enviarNota.setBackground(new Color(239, 246, 255));
 
         notaPanel.add(panelEdicao1);
         notaPanel.add(panelEdicao2);
@@ -66,6 +77,10 @@ public class Notas {
         getBotaoUpload();
         getBotaoModelo();
         getBotaoEnviarNotas();
+
+        panelEdicao1.setBackground(new Color(89, 165, 201, 169));
+        panelEdicao2.setBackground(new Color(89, 165, 201, 169));
+        notaPanel.setBackground(new Color(5, 128, 176, 169));
         return notaPanel;
     }
 
