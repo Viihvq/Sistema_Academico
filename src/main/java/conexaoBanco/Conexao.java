@@ -12,7 +12,7 @@ public class Conexao {
 	private String usuario = "ojrssqyxcuvchb";
 	private String senha = "7e0451c25f74472b37a98164416b78031b107a4957060254fe4c55260e372a20";
 
-	// M�todo que faz a conex�o com o banco de dados
+	// Metodo que faz a conexao com o banco de dados
 	public Connection conectar() {
 		try {
 			conexao = DriverManager.getConnection(url, usuario, senha);

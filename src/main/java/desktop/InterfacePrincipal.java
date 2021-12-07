@@ -37,7 +37,7 @@ public class InterfacePrincipal extends JFrame {
         botoesIniciais();
 
         exibe("inicial");
-        setTitle("Sistema Acadêmico");
+        setTitle("Sistema Academico");
 
         setSize(400,350); //---------
         setResizable(false);

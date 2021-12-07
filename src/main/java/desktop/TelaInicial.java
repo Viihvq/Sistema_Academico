@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class TelaInicial {
     private JButton criarAtividade;
-    private JButton lançarNota;
+    private JButton lancarNota;
     private JPanel inicialPanel;
 
     TelaInicial(){}
@@ -22,11 +22,11 @@ public class TelaInicial {
         criarAtividade.setFocusPainted(false);
         inicialPanel.add(criarAtividade);
 
-        lançarNota = new JButton("Lançar nota");
-        lançarNota.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-        lançarNota.setBounds(95, 170, 200, 60);//---
-        lançarNota.setBackground(new Color(239, 246, 255));
-        inicialPanel.add(lançarNota);
+        lancarNota = new JButton("Lançar nota");
+        lancarNota.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+        lancarNota.setBounds(95, 170, 200, 60);//---
+        lancarNota.setBackground(new Color(239, 246, 255));
+        inicialPanel.add(lancarNota);
 
         inicialPanel.setBackground(new Color(5, 128, 176, 169));
         return inicialPanel;
@@ -37,6 +37,6 @@ public class TelaInicial {
     }
 
     public JButton getBotaoNota(){
-        return lançarNota;
+        return lancarNota;
     }
 }
