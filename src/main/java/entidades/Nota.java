@@ -5,8 +5,40 @@ public class Nota {
     private Integer id_atividade;
     private Integer matricula_aluno;
     private Double nota_aluno;
+    
+    private Atividade atividade;
+    private Aluno matriculas_aluno;
+    
+    public Nota() {
+  	}
+    
+    public Nota(Double nota_aluno) {
+		this.nota_aluno = nota_aluno;
+	}
+    
 
-    public Integer getId() {
+    public Nota(Integer id, Atividade atividade, Integer matricula_aluno, Double nota_aluno) {
+		this.id = id;
+		this.atividade = atividade;
+		this.matricula_aluno = matricula_aluno;
+		this.nota_aluno = nota_aluno;
+	}
+    
+    public Nota(Integer id, Atividade atividade, Aluno matriculas_aluno, Double nota_aluno) {
+		this.id = id;
+		this.atividade = atividade;
+		this.matriculas_aluno = matriculas_aluno;
+		this.nota_aluno = nota_aluno;
+	}
+    
+    public Nota(Integer id, Integer id_atividade, Integer matricula_aluno, Double nota_aluno) {
+		this.id = id;
+		this.id_atividade = id_atividade;
+		this.matricula_aluno = matricula_aluno;
+		this.nota_aluno = nota_aluno;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -38,4 +70,28 @@ public class Nota {
     public void setNota_aluno(Double nota_aluno) {
         this.nota_aluno = nota_aluno;
     }
+
+	public Atividade getAtividade() {
+		return atividade;
+	}
+
+	public void setAtividade(Atividade atividade) {
+		this.atividade = atividade;
+	}
+
+	public Aluno getMatriculas_aluno() {
+		return matriculas_aluno;
+	}
+
+	public void setMatriculas_aluno(Aluno matriculas_aluno) {
+		this.matriculas_aluno = matriculas_aluno;
+	}
+
+	@Override
+	public String toString() {
+		return "Nota [id=" + id + ", id_atividade=" + id_atividade + ", matricula_aluno=" + matricula_aluno
+				+ ", nota_aluno=" + nota_aluno + ", atividade=" + atividade + ", matriculas_aluno=" + matriculas_aluno
+				+ "]";
+	}
+	
 }
