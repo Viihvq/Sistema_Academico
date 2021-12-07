@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class TelaInicial {
     private JButton criarAtividade;
-    private JButton lancarNota;
+    private JButton lançarNota;
     private JPanel inicialPanel;
 
     TelaInicial(){}
@@ -13,18 +13,22 @@ public class TelaInicial {
     public JPanel criaJPanelInicial(){
         inicialPanel = new JPanel();
         inicialPanel.setLayout(null);
-        inicialPanel.setBorder(BorderFactory.createEmptyBorder(50,50,50,50));
+//        inicialPanel.setBorder(BorderFactory.createEmptyBorder(30,50,50,50));
 
         criarAtividade = new JButton("Criar atividade");
         criarAtividade.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-        criarAtividade.setBounds(95, 90, 200, 60);
+        criarAtividade.setBounds(95, 80, 200, 60); //---
+        criarAtividade.setBackground(new Color(239, 246, 255));
+        criarAtividade.setFocusPainted(false);
         inicialPanel.add(criarAtividade);
 
-        lancarNota = new JButton("Lançar nota");
-        lancarNota.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-        lancarNota.setBounds(95, 200, 200, 60);
-        inicialPanel.add(lancarNota);
+        lançarNota = new JButton("Lançar nota");
+        lançarNota.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+        lançarNota.setBounds(95, 170, 200, 60);//---
+        lançarNota.setBackground(new Color(239, 246, 255));
+        inicialPanel.add(lançarNota);
 
+        inicialPanel.setBackground(new Color(5, 128, 176, 169));
         return inicialPanel;
     }
 
@@ -33,6 +37,6 @@ public class TelaInicial {
     }
 
     public JButton getBotaoNota(){
-        return lancarNota;
+        return lançarNota;
     }
 }

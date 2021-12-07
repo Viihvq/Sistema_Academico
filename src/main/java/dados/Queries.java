@@ -19,7 +19,7 @@ import entidades.Turma;
 
 public class Queries {
 
-	private Connection conexaoBD = null;
+	private static Connection conexaoBD;
 	private PreparedStatement ps = null;
 	private ResultSet rs = null;
 
@@ -42,38 +42,39 @@ public class Queries {
 		conexaoBD = conexao;
 	}
 
-	public void cadastroAtividade(String nome, Date data_entrega, Double valor_max) throws SQLException {
-		System.out.println("chegou");// DEBBUG
-		ps = conexaoBD.prepareStatement("INSERT INTO atividade (nome, data_de_entrega, valor_maximo) VALUES(?, ?, ?);");
-		ps.setDate(2, data_entrega);
-		ps.setDouble(3, valor_max);
-		ps.execute();
+	public static void cadastroAtividade(String nome, Date data_entrega, Double valor_max) throws SQLException {
+		System.out.println("chegou");//DEBBUG
+		PreparedStatement preparedStatement = conexaoBD.prepareStatement("INSERT INTO atividade (nome, data_de_entrega, valor_maximo, id_professor) VALUES(?, ?, ?, 1);");
+		preparedStatement.setString(1, nome);
+		preparedStatement.setDate(2,data_entrega);
+		preparedStatement.setDouble(3,valor_max);
+		preparedStatement.execute();
 		System.out.println("entrou no cadastro");
 	}
 
 	public int getTotalAtividade() throws SQLException {
-		ps = conexaoBD.prepareStatement("Select count(*) from atividade;");
+		PreparedStatement ps = conexaoBD.prepareStatement("Select count(*) from atividade;");
 		ps.execute();
-		rs = ps.getResultSet();
+		ResultSet rsCount = ps.getResultSet();
 
 		Integer contador = 0;
 
-		if (rs.next()) {
-			contador = rs.getInt(1);
-			System.out.println(rs.getInt(1));
+		if(rsCount.next()) {
+			contador = rsCount.getInt(1);
+			System.out.println(rsCount.getInt(1));
 		}
 		return contador;
 	}
 
 	public String[] getNomeAtividade() throws SQLException {
-		ps = conexaoBD.prepareStatement("SELECT nome FROM atividade;");
-		ps.execute();
-		rs = ps.getResultSet();
+		PreparedStatement preparedStatement = conexaoBD.prepareStatement("SELECT nome FROM atividade;");
+		preparedStatement.execute();
+		ResultSet rs = preparedStatement.getResultSet();
 
 		String[] atividades = new String[getTotalAtividade()];
 
 		int contador = 0;
-		while (rs.next()) {
+		while (rs.next()){
 			atividades[contador] = rs.getString(1);
 //            System.out.println(atividades[contador]); //DEBUG
 			contador++;
@@ -83,55 +84,51 @@ public class Queries {
 	}
 
 	public void getIdAtividade(String nomeAtividade) throws SQLException {
-		ps = conexaoBD.prepareStatement("SELECT id, valor_maximo FROM atividade WHERE nome='" + nomeAtividade + "';");
+		PreparedStatement ps = conexaoBD.prepareStatement("SELECT id, valor_maximo FROM atividade WHERE nome='"+nomeAtividade+"';");
 		ps.execute();
-		rs = ps.getResultSet();
+		ResultSet rs = ps.getResultSet();
 
 		atividade = new Atividade();
 
-		while (rs.next()) {
+		while (rs.next()){
 			atividade.setId(rs.getInt(1));
 			atividade.setValor_maximo(rs.getDouble(2));
 
-			System.out.println(atividade.getId() + " " + atividade.getValor_maximo());
+			System.out.println(atividade.getId()+" "+atividade.getValor_maximo());
 		}
 	}
 
 	public void getMatriculaAluno(String nomeAluno) throws SQLException {
-		ps = conexaoBD.prepareStatement("SELECT matricula FROM aluno WHERE nome='" + nomeAluno + "';");
+		PreparedStatement ps = conexaoBD.prepareStatement("SELECT matricula FROM aluno WHERE nome='"+nomeAluno+"';");
 		ps.execute();
 		ResultSet rs = ps.getResultSet();
 
 		aluno = new Aluno();
 
-		while (rs.next()) {
+		while (rs.next()){
 			aluno.setMatricula(rs.getInt(1));
-			System.out.println("MATRICULA: " + aluno.getMatricula());
+			System.out.println("MATRICULA: "+aluno.getMatricula());
 		}
 	}
 
-	public Integer setNotas(String nomeAluno, Double notaAluno, String nomeAtividade) {
-		Integer count = 0;
+	public Integer setNotas(String nomeAluno, Double notaAluno, String nomeAtividade){
+		Integer count=0;
 		try {
-			System.out
-					.println("Nome aluno: " + nomeAluno + " Nota aluno: " + notaAluno + " Atividade: " + nomeAtividade); // DEBUG
-			ps = conexaoBD
-					.prepareStatement("INSERT INTO nota (id_atividade, matricula_aluno, nota_aluno) VALUES (?,?,?);");
+			System.out.println("Nome aluno: "+nomeAluno+" Nota aluno: "+notaAluno+" Atividade: "+nomeAtividade); //DEBUG
+			PreparedStatement ps = conexaoBD.prepareStatement("INSERT INTO nota (id_atividade, matricula_aluno, nota_aluno) VALUES (?,?,?);");
 
 			getIdAtividade(nomeAtividade);
 			getMatriculaAluno(nomeAluno);
 
-			if (notaAluno > atividade.getValor_maximo()) {
-				JOptionPane
-						.showMessageDialog(null,
-								"Confira o arquivo novamente. " + "\nNota do(a) aluno(a) " + nomeAluno
-										+ " não correspondente com o valor estipulado",
-								"ERROR", JOptionPane.ERROR_MESSAGE);
+			if (notaAluno > atividade.getValor_maximo()){
+				JOptionPane.showMessageDialog(null,"Confira o arquivo novamente. " +
+								"\nNota do(a) aluno(a) "+nomeAluno+" não correspondente com o valor estipulado",
+						"ERROR",JOptionPane.ERROR_MESSAGE);
 				count = 1;
-			} else {
-				ps.setInt(1, atividade.getId());
-				ps.setInt(2, aluno.getMatricula());
-				ps.setDouble(3, notaAluno);
+			}else{
+				ps.setInt(1,atividade.getId());
+				ps.setInt(2,aluno.getMatricula());
+				ps.setDouble(3,notaAluno);
 				ps.execute();
 				count = 0;
 			}
@@ -209,7 +206,7 @@ public class Queries {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Matricula n�o encontrada!");
+			System.out.println("Matricula nao encontrada!");
 		}
 		return null;
 
@@ -234,7 +231,7 @@ public class Queries {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Professor n�o encontrado!");
+			System.out.println("Professor nao encontrado!");
 		}
 		return null;
 	}
@@ -255,7 +252,7 @@ public class Queries {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Turma n�o encontrada!");
+			System.out.println("Turma nao encontrada!");
 		}
 		return null;
 	}
@@ -281,7 +278,7 @@ public class Queries {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Atividade n�o encontrada!");
+			System.out.println("Atividade nao encontrada!");
 		}
 		return null;
 	}
@@ -305,7 +302,7 @@ public class Queries {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Aluno n�o encontrado!");
+			System.out.println("Aluno nao encontrado!");
 		}
 		return null;
 	}
@@ -329,7 +326,7 @@ public class Queries {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Nota do aluno n�o encontrada!");
+			System.out.println("Nota do aluno nao encontrada!");
 		}
 		return null;
 	}
