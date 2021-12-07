@@ -28,7 +28,6 @@ public class App {
 		Queries queriesDados = new Queries(conexao);
 		System.out.println("Conectando ao banco");
 
-		new InterfacePrincipal(conexao);
 
 		Spark.port(2020);
 		System.out.println("Registrando rotas...");
