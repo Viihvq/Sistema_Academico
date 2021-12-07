@@ -5,8 +5,27 @@ public class Professor {
     private Integer id_turma;
     private String nome;
     private String email;
+    
+    private Turma turma;
 
-    public Integer getId() {
+    public Professor() {
+	}
+    
+    public Professor(Integer id, Turma turma, String nome, String email) {
+		this.id = id;
+		this.turma = turma;
+		this.nome = nome;
+		this.email = email;
+	}
+    
+    public Professor(Integer id, Integer id_turma, String nome, String email) {
+		this.id = id;
+		this.id_turma = id_turma;
+		this.nome = nome;
+		this.email = email;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -22,7 +41,7 @@ public class Professor {
         this.id_turma = id_turma;
     }
 
-    public String getNome() {
+    public String getNomeProfessor() {
         return nome;
     }
 
@@ -37,4 +56,19 @@ public class Professor {
     public void setEmail(String email) {
         this.email = email;
     }
+
+	public Turma getTurma() {
+		return turma;
+	}
+
+	public void setTurma(Turma turma) {
+		this.turma = turma;
+	}
+
+	@Override
+	public String toString() {
+		return "Professor [id=" + id + ", id_turma=" + id_turma + ", nome=" + nome + ", email=" + email + ", turma="
+				+ turma + "]";
+	}
+
 }
