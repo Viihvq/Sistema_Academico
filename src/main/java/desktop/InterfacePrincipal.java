@@ -18,6 +18,10 @@ public class InterfacePrincipal extends JFrame {
     private Atividade atividade;
     private Professor professor;
 
+    public void exibeInterface() {
+        this.setLocationRelativeTo((Component)null);
+        this.setVisible(true);
+    }
 
     public InterfacePrincipal(Connection conexao){
         conexaoBanco = conexao;
