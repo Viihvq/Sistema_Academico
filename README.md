@@ -47,6 +47,11 @@
   
 ## 📋 Consultando as notas:
   - As matrículas disponíveis para consulta se encontram do número 2 ao 17
+
+##
+  
+## 📌 Porta a ser usada:
+  - Ao executar o projeto deve-se usar a seguindo URL para acessar a aplicação web: http://localhost:2020
   
 ## 
  
