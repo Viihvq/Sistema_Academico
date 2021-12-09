@@ -16,6 +16,8 @@ import entidades.Professor;
 import entidades.Turma;
 import spark.Spark;
 
+import javax.swing.*;
+
 public class App {
 
 	private static Queries queriesDados = null;
@@ -46,8 +48,10 @@ public class App {
 			try {
 				boolean existe = false;
 				existe = queriesDados.buscaMatricula(matricula) != null;
+				System.out.println(matricula+" "+existe);
 				if (existe) {
 					res.redirect("/exibir-notas?matricula=" + matricula);
+					System.out.println("ENTROU NO IF");
 					return "";
 				} else {
 					return "Matricula nao encontrada!";
@@ -65,7 +69,7 @@ public class App {
 				Aluno al = queriesDados.buscaAluno(matricula);
 				Turma t = queriesDados.buscaTurma(al.getTurma().getId());
 				Nota n = queriesDados.buscaNota(matricula);
-				Atividade at = queriesDados.buscaAtividade(n.getAtividade().getId());
+				Atividade at = queriesDados.buscaAtividade(n.getAtividade().getId());//--
 				Professor p = queriesDados.buscaProfessor(at.getProfessor().getId());
 				List<Avaliacao> av = queriesDados.buscaTodasNotas(matricula);
 
@@ -79,6 +83,7 @@ public class App {
 
 				return ViewUtil.renderiza("/exibe-notas.html", ctx);
 			} catch (Exception e) {
+				System.out.println("NÃO ENTROU NO EXIBIR");
 				return e.getClass().getName() + ": " + e.getMessage();
 			}
 

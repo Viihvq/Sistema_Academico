@@ -308,14 +308,15 @@ public class Queries {
 	}
 
 	// Metodo para buscar uma nota no banco
-	public Nota buscaNota(int idNota) {
+	public Nota buscaNota(int matriculaAluno) {
 		try {
-			ps = conexaoBD.prepareStatement("SELECT * FROM aluno, nota WHERE id = ?");
-			ps.setInt(1, idNota);
+			ps = conexaoBD.prepareStatement("select * from aluno join nota on (aluno.matricula = nota.matricula_aluno) where matricula = ?"); //----
+			ps.setInt(1, matriculaAluno);
 			ps.execute();
 			rs = ps.getResultSet();
-
+			System.out.println("Entrou em busca nota: "+matriculaAluno);
 			if (rs.next()) {
+				System.out.println("Entrou no while");
 				int idzinho = rs.getInt("id");
 				int matricula_aluno = rs.getInt("matricula_aluno");
 				double nota_aluno = rs.getDouble("nota_aluno");

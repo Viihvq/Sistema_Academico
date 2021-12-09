@@ -130,7 +130,11 @@ public class Notas {
                             JOptionPane.ERROR_MESSAGE);
                 }
 
-            } catch (FileNotFoundException e) {
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,
+                        "ERRO \nFAVOR TENTAR NOVAMENTE! VERIFIQUE O ARQUIVO NOVAMENTE.",
+                        "ERROR",JOptionPane.ERROR_MESSAGE
+                );
                 e.printStackTrace();
             }
         });
