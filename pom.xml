@@ -44,7 +44,7 @@
                 <version>3.3.0</version>
                 <configuration>
                     <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies-web</descriptorRef>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
                     <archive>
                         <manifest>
